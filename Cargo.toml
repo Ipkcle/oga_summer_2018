@@ -1,0 +1,9 @@
+[package]
+name = "oga_summer_2018"
+version = "0.1.0"
+authors = ["Adrian Fullmer <ipkcle@gmail.com>"]
+build = "build.rs"
+
+[dependencies]
+ggez = "0.4"
+rand = "0.4"
