@@ -65,6 +65,12 @@ impl EventHandler for MainState {
         self.debug_display.load("fps".to_owned(), fps.to_string());
 
         //draw test
+        for x in (0..10) {
+            for y in (0..10) {
+                self.draw_sprite(ctx, SpriteName::Floor, x, y);
+            }
+        }
+
         self.draw_sprite(ctx, SpriteName::Archer, 1, 1);
         self.draw_sprite(ctx, SpriteName::Wizard, 1, 0);
         self.draw_sprite(ctx, SpriteName::UndeadWizard, 0, 1);

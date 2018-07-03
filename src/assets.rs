@@ -28,11 +28,13 @@ pub enum SpriteName {
     UndeadChampion,
     UndeadKing,
     UndeadBodyguard,
+    Floor,
 }
 
 #[derive(PartialEq, Eq, Hash, Clone, Copy)]
 pub enum SpriteSheet {
     Main,
+    BricksAndTiles,
 }
 
 #[derive(Clone, Copy)]
@@ -52,6 +54,10 @@ impl Sprites {
         sprite_sheets.insert(
             SpriteSheet::Main,
             Image::new(ctx, Path::new("/Spiderdave_main.png")).unwrap(),
+        );
+        sprite_sheets.insert(
+            SpriteSheet::BricksAndTiles,
+            Image::new(ctx, Path::new("/Spiderdave_bricks_and_tiles.png")).unwrap(),
         );
         let mut new_sprites = Self {
             sprite_sheets,
@@ -77,6 +83,7 @@ impl Sprites {
         new_sprites.sprite_default(SpriteName::UndeadChampion, SpriteSheet::Main, 7, 3);
         new_sprites.sprite_default(SpriteName::UndeadKing, SpriteSheet::Main, 8, 3);
         new_sprites.sprite_default(SpriteName::UndeadBodyguard, SpriteSheet::Main, 9, 3);
+        new_sprites.sprite_default(SpriteName::Floor, SpriteSheet::BricksAndTiles, 5, 1);
         new_sprites
     }
 
