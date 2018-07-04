@@ -1,3 +1,9 @@
+#[macro_use]
+extern crate derive_new;
+#[macro_use]
+extern crate derive_more;
+#[macro_use]
+extern crate derive;
 extern crate ggez;
 extern crate rand;
 
@@ -9,6 +15,8 @@ mod assets;
 mod main_state;
 mod game_object;
 mod utils;
+#[macro_use]
+mod macros;
 
 fn main() {
     let (width, height) = (800, 450);

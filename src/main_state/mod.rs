@@ -7,7 +7,7 @@ use ggez::timer;
 use ggez::{Context, GameResult};
 
 pub static PIXELS_PER_TILE: u32 = 8;
-pub static SCALE_FACTOR: f32 = 10.0;
+pub static SCALE_FACTOR: f32 = 8.0;
 pub fn screen_pixels_per_tile() -> u32 {
     (PIXELS_PER_TILE as f32 * SCALE_FACTOR) as u32
 }

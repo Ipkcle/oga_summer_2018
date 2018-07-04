@@ -5,5 +5,8 @@ authors = ["Adrian Fullmer <ipkcle@gmail.com>"]
 build = "build.rs"
 
 [dependencies]
+derive = { path = "derive" }
+derive_more = "0.11.0"
+derive-new = "0.5"
 ggez = "0.4"
 rand = "0.4"
