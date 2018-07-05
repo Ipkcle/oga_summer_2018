@@ -1,5 +1,5 @@
-use std::collections::HashSet;
 use assets::SpriteName;
+use std::collections::{hash_map::Values, HashMap, HashSet};
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Hash, Add, Sub, AddAssign, SubAssign, From, Into,
          Constructor, Mul, MulAssign)]
@@ -34,6 +34,7 @@ pub trait HasTile {
     }
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Side {
     Player,
     Enemy,
@@ -86,8 +87,8 @@ impl Unit {
         for x in 0..range as i16 {
             for y in 0..range as i16 {
                 if (x == 0) ^ (y == 0) {
-                attack_pattern.insert(Tile::new(x, y));
-                attack_pattern.insert(Tile::new(-x, -y));
+                    attack_pattern.insert(Tile::new(x, y));
+                    attack_pattern.insert(Tile::new(-x, -y));
                 }
             }
         }
@@ -124,5 +125,43 @@ impl Unit {
             health: Health::new(5),
             tile,
         }
+    }
+
+    pub fn get_side(&self) -> Side {
+        self.side
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Hash, Default, Constructor)]
+pub struct UnitId(u32);
+
+impl UnitId {
+    pub fn next(&self) -> Self {
+        UnitId(self.0 + 1)
+    }
+}
+
+#[derive(Default, new)]
+pub struct Units {
+    #[new(default)]
+    units: HashMap<UnitId, Unit>,
+    #[new(default)]
+    last_id: UnitId,
+}
+
+impl Units {
+    pub fn iter(&self) -> impl Iterator<Item = &Unit> {
+        self.units.values()
+    }
+
+    pub fn make_unit(&mut self, unit: Unit) -> UnitId {
+        let next_id = self.last_id.next();
+        self.units.insert(next_id, unit);
+        self.last_id = next_id;
+        next_id
+    }
+    
+    pub fn get_unit_mut(&mut self, unit_id: UnitId) -> Option<&mut Unit> {
+        self.units.get_mut(&unit_id)   
     }
 }
